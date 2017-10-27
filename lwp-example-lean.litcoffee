@@ -3,22 +3,39 @@
 
 ## Overview
 
-To know what's going on here, you should first have read the documenation
-for [the simple example application](simple-example-solo.litcoffee) and then
-for [the complex example application](complex-example-solo.litcoffee).
-This application is more useful than either of those.
+This application can serve as an example of how to build an application on
+the [Lurch Web Platform (LWP)](https://github.com/lurchmath/lurch).  But it
+is by far the most complex example application of its type.  In fact, it's a
+bit of a test case for how much you can do with the LWP.
+
+This application does all of the following.
+ * Imports the entire [Lean Prover](http://leanprover.github.io/)
+ * Declares ways the user can write Lean semantics in a web-based word
+   processor
+ * Creates rules that govern those structures and how to convert them into
+   code the Lean Prover can understand
+ * Provides a command for running the Lean engine on that code
+ * Converts all positive/negative feedback from the Lean engine back into
+   the appropriate locations in the word processor for user consumption
+
+Consequently, readers should not start learning the LWP through this
+application.  See the several other example repositories of the form
+`lwp-example-<name>` within
+[the Lurch Project](https://github.com/lurchmath) on GitHub.
 
     setAppName 'LeanApp'
-    addHelpMenuSourceCodeLink 'app/lean-example-solo.litcoffee'
+    addHelpMenuSourceCodeLink \
+        'lwp-example-lean/blob/master/lwp-example-lean.litcoffee'
     window.helpAboutText =
         '<p>See the fully documented <a target="top"
-        href="https://github.com/nathancarter/weblurch/blob/master/app/lean-example-solo.litcoffee"
+        href="https://github.com/lurchmath/lwp-example-lean/blob/master/lwp-example-lean.litcoffee"
         >source code for this demo app</a>.</p>'
 
-[See a live version of this application online here.](
-http://nathancarter.github.io/weblurch/app/lean-example.html)
+[See a live version of this application online here.](https://lurchmath.github.io/lwp-example-lean/)
 
 ## Utilities for timing things
+
+Just a few simple definitions used throughout the file below.
 
     myTimer = null
     now = -> ( new Date ).getTime()
@@ -37,6 +54,12 @@ construction) or most recent (if just completed) object dumped by the Lean
 VM on its standard output channel.  The global variable `LeanOutputArray` is
 the ordered collection of all such output objects, in the order they were
 produced.
+
+Note that all this code must be run before the `lean.js` file from the
+lean.js repository is loaded.  This sets up the `Module` variable in the
+global namespace, so that the `lean.js` script can use the data we've placed
+there to interface with our code.  In [index.html](the HTML page), at the
+end, you can see that we import this code first, then `lean.js`.
 
     # console.log( '--- Loading Lean VM...' );
     Module = window.Module = { }
@@ -80,6 +103,10 @@ error messages produced by the engine are converted into output objects by
 the `Module.print` function, above, and collected into the global variable
 `LeanOutputArray`, which this function then returns.
 
+Again, users who wish to see a lot of debugging and timing output can
+uncomment the debugging and timing lines below.  We leave them in because
+they double as simple comments about what the code does.
+
     runLeanOn = window.runLeanOn = ( code ) ->
         # console.log '--- Calling lean_init()...'
         # startTimer()
@@ -89,7 +116,7 @@ the `Module.print` function, above, and collected into the global variable
         # startTimer();
         Module.lean_import_module "standard"
         # console.log '--- Standard module imported.', checkTimer()
-        # console.log '--- Writing test.lean to virtual FS...'
+        # console.log '--- Writing test.lean to virtual filesystem...'
         # startTimer()
         # console.log code
         FS.writeFile 'test.lean', code, encoding : 'utf8'
@@ -133,7 +160,9 @@ operate on a clean slate.
         validationRunning = no
 
 Now, the validation routine that operates on the whole document at once.  It
-presumes that you have just run `clearAllValidity()`.
+presumes that you have just run `clearAllValidity()`.  Much of the code in
+this routine will not make sense to the reader who has not read the tutorial
+on how to use this app; start there first.
 
     validate = window.validate = ->
         groups = tinymce.activeEditor.Groups
@@ -256,7 +285,10 @@ format for how it is converted into a line of Lean code.
 
 ## Term Groups
 
-Declare a new type of group in the document, for Lean terms.
+Declare a new type of group in the document, for Lean terms.  We do not
+document each of these properties here, because they were documented more
+thoroughly in the simpler Lurch Web Platform example apps linked to at the
+top of this file.
 
     window.groupTypes = [
         name : 'term'
@@ -519,7 +551,10 @@ reachable nodes without seeing it, say so.
 
 ## Type Groups
 
-Declare a new type of group in the document, for Lean types.
+Declare a new type of group in the document, for Lean types.  We do not
+document each of these properties here, because they were documented more
+thoroughly in the simpler Lurch Web Platform example apps linked to at the
+top of this file.
 
     window.groupTypes.push
         name : 'type'
@@ -549,7 +584,9 @@ Install the arrows UI so that types can connect to terms.
 ## Body Groups
 
 Declare a new type of group in the document, for the bodies of definitions,
-theorems, examples, sections, and namespaces.
+theorems, examples, sections, and namespaces.  We do not document each of
+these properties here, because they were documented more thoroughly in the
+simpler Lurch Web Platform example apps linked to at the top of this file.
 
     window.groupTypes.push
         name : 'body'
