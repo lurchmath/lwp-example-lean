@@ -1,5 +1,5 @@
 
-# Lean Example webLurch Application
+# Lean Example Application, Lurch Web Platform
 
 ## Overview
 
