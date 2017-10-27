@@ -49,7 +49,7 @@ Giving Lean a command:
  * To have lean check what you've done, you must instruct it that "checking"
    is what you're looking for.
  * Place your cursor inside the black group containing the natural number.
- * Click the bubble tag that appears, and choose "Edit command" from the
+ * Right-click the natural number and choose "Edit command..." from the
    popup menu.
  * Type the word `check` (lower case, no spaces) in the blank and press
    Enter.
