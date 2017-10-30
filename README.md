@@ -64,3 +64,18 @@ Running Lean:
    to load and execute.
  * You should see green check marks next to both of your groups in the
    document, indicating that Lean agrees with you: 123 is a natural number.
+
+## Bug fixes and/or enhancements
+
+Here are the planned to-dos for this demo application.
+
+### Bugs
+
+ * The `termGroupToCode` function uses `contentsAsText`, which ignores
+   paragraph breaks, as if they were not whitespace; this is problematic.
+   Use `contentAsCode` instead, which respects paragraph breaks.
+
+### Enhancements
+
+ * How might we work Lean's `notation` definitions in with MathQuill
+   widgets in the document?
