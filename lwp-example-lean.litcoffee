@@ -33,11 +33,6 @@ application.  See the several other example repositories of the form
 
 [See a live version of this application online here.](https://lurchmath.github.io/lwp-example-lean/)
 
-This application needs the equation editor plugin, so we must tell the setup
-script to load it, by modifying the following global variable.
-
-    window.pluginsToLoad.push 'equationeditor'
-
 ## Utilities for timing things
 
 Just a few simple definitions used throughout the file below.
