@@ -18,10 +18,14 @@ For those unfamiliar with Lean, see its website
 
 [Visit the app here.](https://lurchmath.github.io/lwp-example-lean)
 
-There is an extensive tutorial on how to use this application, but it is in
-the process of getting migrated to this new repository.  For that reason, we
-content ourselves with a very tiny demo of how you can talk to Lean through
-this app.  Full tutorial to be imported in the future.
+[See the full tutorial here.](https://lurchmath.github.io/lwp-example-lean/site)
+
+Read the (heavily commented) code here:
+
+ * [App code](lwp-example-lean.litcoffee) for this specific example
+ * [HTML code](index.html) that loads the platform and application
+
+## A very abridged tutorial
 
 Create a term:
 
@@ -60,12 +64,3 @@ Running Lean:
    to load and execute.
  * You should see green check marks next to both of your groups in the
    document, indicating that Lean agrees with you: 123 is a natural number.
-
-A full tutorial will be imported here later.
-
-Read the (heavily commented) code here:
-
- * [App code](lwp-example-lean.litcoffee) for this specific example
- * [HTML code](index.html) that loads the platform and application
-
-There is also a very simple [build process](gulpfile.litcoffee).

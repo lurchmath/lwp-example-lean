@@ -1,0 +1,12 @@
+site_name: Lean Example App Tutorial
+pages:
+- Home: index.md
+- Part 1: tutorial-1.md
+- Part 2: tutorial-2.md
+- Part 3: tutorial-3.md
+- Part 4: tutorial-4.md
+- Part 5: tutorial-5.md
+- Part 6: tutorial-6.md
+- Part 7: tutorial-7.md
+- Part 8: tutorial-8.md
+dev_addr: 127.0.0.1:8888
